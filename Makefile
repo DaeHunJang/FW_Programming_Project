@@ -5,7 +5,7 @@ TARGET			= arm-none-eabi
 
 # Project name & Link script
 OUT_FILE_NAME 	= rom_0x08003000
-LDS_FILE_NAME	= rom_0x08003000.lds
+LDS_FILE_NAME	= build/rom_0x08003000.lds
 
 # Compiler & Linker Option, Cortex-M3 & No FPU
 CFLAGS			= -mcpu=cortex-m3 -c -g -O3 -Wall -mthumb -msoft-float -fno-builtin -funsigned-char
@@ -13,10 +13,10 @@ CFLAGS		    += -fno-strict-aliasing -fno-common -pipe -mapcs -mno-thumb-interwor
 LDFLAGS			= --cref -Bstatic -nostdlib -p -EL -lm
 
 # Output File definition
-OUT_BIN_FILE	= $(OUT_FILE_NAME).bin
-OUT_ELF_FILE	= $(OUT_FILE_NAME).elf
-OUT_MAP_FILE	= $(OUT_FILE_NAME).map
-OUT_DUMP_FILE	= $(OUT_FILE_NAME).dmp
+OUT_BIN_FILE	= build/$(OUT_FILE_NAME).bin
+OUT_ELF_FILE	= build/$(OUT_FILE_NAME).elf
+OUT_MAP_FILE	= build/$(OUT_FILE_NAME).map
+OUT_DUMP_FILE	= build/$(OUT_FILE_NAME).dmp
 
 # Tool setting
 AS				= "$(TOOL_DIR)/bin/$(TARGET)-as"
@@ -30,7 +30,7 @@ CSRC 			= $(wildcard src/*.c)
 ASRC 			= $(wildcard src/*.s)
 HEADER 			= $(wildcard inc/*.h)
 OBJS    		= $(CSRC:.c=.o) $(ASRC:.s=.o)
-DUMP 			= $(wildcard *.txt)
+DUMP 			= build/__dump.txt build/__dump_all.txt
 
 # Library and include folder
 C_DIR			= $(TOOL_DIR)/$(TARGET)
@@ -42,8 +42,8 @@ all : $(OUT_BIN_FILE)
 
 $(OUT_BIN_FILE): $(OUT_ELF_FILE)
 	$(OBJCOPY) $(OUT_ELF_FILE) $(OUT_BIN_FILE) -O binary
-	$(OBJDUMP) -x -D .\$(OUT_ELF_FILE) > .\__dump.txt
-	$(OBJDUMP) -x -D -S .\$(OUT_ELF_FILE) > .\__dump_all.txt
+	$(OBJDUMP) -x -D $(OUT_ELF_FILE) > build/__dump.txt
+	$(OBJDUMP) -x -D -S $(OUT_ELF_FILE) > build/__dump_all.txt
 
 $(OUT_ELF_FILE): $(OBJS)
 	$(LD) $(OBJS) -o $(OUT_ELF_FILE) $(LDFLAGS) -Map $(OUT_MAP_FILE) $(LIB_OPTION) -T $(LDS_FILE_NAME)

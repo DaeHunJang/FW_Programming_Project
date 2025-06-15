@@ -48,44 +48,8 @@
 │   ├── device_driver.h    # 디바이스 드라이버
 │   ├── macro.h            # 매크로 정의
 │   └── option.h           # 옵션 설정
+├── build/                  # 빌드 출력 파일
+│   └── rom_0x08003000.lds # 링커 스크립트
 ├── Makefile               # 빌드 설정
 └── README.md             # 프로젝트 문서
 ```
-
-## 빌드 및 실행
-
-### 요구사항
-- ARM GCC 컴파일러 (arm-none-eabi-gcc)
-- Make
-- ST-Link (디버깅 및 프로그래밍)
-
-### 빌드 방법
-```bash
-# 프로젝트 클론
-git clone [repository-url]
-cd [project-directory]
-
-# 빌드
-make clean
-make
-
-# 바이너리 파일 생성
-make bin
-```
-
-### 프로그래밍
-1. ST-Link를 보드에 연결
-2. 다음 명령어로 바이너리 파일 업로드:
-```bash
-st-flash write rom_0x08003000.bin 0x08003000
-```
-
-## 메모리 맵
-- 프로그램 메모리: 0x08003000
-- RAM: 0x20000000
-- 주변장치 레지스터: 0x40000000
-
-## 주의사항
-1. 전원 공급 시 정격 전압 준수
-2. 모터 드라이버 연결 시 올바른 핀 연결 확인
-3. 통신 인터페이스 연결 시 레벨 변환 확인

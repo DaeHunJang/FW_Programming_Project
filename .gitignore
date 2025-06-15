@@ -6,6 +6,9 @@
 *.map
 *.lst
 
+# Build directory
+build/
+
 # IDE specific files
 .vscode/
 .idea/
