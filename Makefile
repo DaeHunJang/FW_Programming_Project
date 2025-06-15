@@ -26,9 +26,9 @@ OBJCOPY			= "$(TOOL_DIR)/bin/$(TARGET)-objcopy"
 OBJDUMP			= "$(TOOL_DIR)/bin/$(TARGET)-objdump"
 
 # Source & Header File 
-CSRC 			= $(wildcard *.c)
-ASRC 			= $(wildcard *.s)
-HEADER 			= $(wildcard *.h)
+CSRC 			= $(wildcard src/*.c)
+ASRC 			= $(wildcard src/*.s)
+HEADER 			= $(wildcard inc/*.h)
 OBJS    		= $(CSRC:.c=.o) $(ASRC:.s=.o)
 DUMP 			= $(wildcard *.txt)
 
@@ -36,7 +36,7 @@ DUMP 			= $(wildcard *.txt)
 C_DIR			= $(TOOL_DIR)/$(TARGET)
 GCC_DIR			= $(TOOL_DIR)/lib/gcc/$(TARGET)/$(VERSION)
 LIB_OPTION		= -L "$(C_DIR)/lib/thumb2" -L "$(GCC_DIR)/thumb2" -lc -lgcc
-INCLUDE			= -nostdinc  -I. -I "$(C_DIR)/include" -I "$(GCC_DIR)/include" 
+INCLUDE			= -nostdinc -Iinc -I "$(C_DIR)/include" -I "$(GCC_DIR)/include" 
 
 all : $(OUT_BIN_FILE)
 

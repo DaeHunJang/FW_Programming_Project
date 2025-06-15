@@ -1,0 +1,34 @@
+# Build output files
+*.o
+*.elf
+*.bin
+*.hex
+*.map
+*.lst
+
+# IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Debug files
+*.d
+*.su
+*.s
+
+# Dump files
+__dump.txt
+__dump_all.txt
+
+# Backup files
+*~
+*.bak
+
+# Dependencies
+*.depend
+*.d
+
+# Other
+.DS_Store
+Thumbs.db 
